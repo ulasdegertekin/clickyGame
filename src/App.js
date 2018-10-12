@@ -9,32 +9,34 @@ class App extends Component {
     images,
     score: 0,
     topscore: 0,
-    id: [],
+    imageIds: [],
   };
 
 
   scoreGif = event => {
     const imageId = event.target.getAttribute("data-id");
     //  console.log(imageId);
-    if (this.state.id.includes(imageId)) {
+    if (this.state.imageIds.includes(imageId)) {
 
       return this.setState({ score: 0 });
+    } else {
+      this.setState({ score: this.state.score + 1 });
+      this.state.imageIds.push(imageId);
+      this.setState({ imageIds: this.state.imageIds })
     }
-    this.setState({ score: this.state.score + 1 });
-    if (this.state.score < this.state.topscore) {
+   
+
+    if (this.state.score >= this.state.topscore) {
       console.log("good");
+      this.setState({ topscore: this.state.score})
     }
+
     for (let i = images.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [images[i], images[j]] = [images[j], images[i]];
     }
 
-    //  let tmp= this.state.id;
-    //  tmp= tmp.push(imageId);
-    //  this.setState({id: tmp});
-    // console.log(tmp);
-
-
+    
   };
 
   render() {
