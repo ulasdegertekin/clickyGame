@@ -27,7 +27,6 @@ class App extends Component {
    
 
     if (this.state.score >= this.state.topscore) {
-      console.log("good");
       this.setState({ topscore: this.state.score})
     }
 
